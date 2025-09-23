@@ -71,7 +71,19 @@ CHANNELS = [
     'lat,deg=136',
     'lon,deg=137',
 
-    # 'pump:freq,kHz=140',
+    'activity,=200',
+    'disk,%=201',
+    'load,=202',
+    'memory,%=203',
+
+    'pump:i_term,=230',
+    'pump:last_time,=231',
+    'pump:set_w,W=232',
+    'pump:p_w,W=233',
+    'pump:u_set_v,V=234',
+    'pump:u_v,V=235',
+    'pump:i_a,A=236',
+    'pump:freq,Hz=237',
 ]
 
 # Map from datatype to channel number
