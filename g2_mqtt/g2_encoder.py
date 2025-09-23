@@ -6,6 +6,9 @@ from bitstring import BitStream, ConstBitStream
 logger = logging.getLogger(__name__)
 
 """
+
+Copied from g2_mqtt package
+
 Header:
 version: uint8  # 1..100 =  0x01..0x64 int
 timestamp: uint32 big endian  # unix timestamp
@@ -13,7 +16,7 @@ timestamp: uint32 big endian  # unix timestamp
 repeat payload:
     byte channel, starts from 101
     float32 big endian value
-    
+
 ```mermaid
 
 ---
@@ -40,7 +43,6 @@ packet
 
 MQTT_ENCODER = 'g2'
 MQTT_TOPIC = 'g2/{network}/{node}'
-
 
 TYPE_FORMAT = 'uint:8'
 TIMESTAMP_FORMAT = 'uintbe:32'
@@ -107,7 +109,8 @@ class G2Encoder:
     version = G2_VERSION
     encode_channels = ENCODE_CHANNELS
     decode_channels = DECODE_CHANNELS
-    PART_SIZE_BITS = 40
+    PART_SIZE_BITS = 5 * 8
+    VERSION_LIMIT = 0x64
 
     verbose = True
 
@@ -124,7 +127,7 @@ class G2Encoder:
             value = measurement['value']
 
             if previous is None or at != previous:
-                if len(payload.bytes) > 5:
+                if len(payload.bytes) > self.PART_SIZE_BITS:
                     yield payload.bytes
                 payload = BitStream()
                 payload.append(f'uint:8={self.version}')
@@ -140,35 +143,33 @@ class G2Encoder:
 
             previous = at
 
-        if payload and len(payload.bytes) > 5:
+        if payload and len(payload.bytes) > self.PART_SIZE_BITS:
             yield payload.bytes
 
     def decode(self, payload: bytes) -> Generator[
         Measurement, None, None]:
         stream = ConstBitStream(payload)
         bits = len(stream)
+        timestamp = 0
 
-        while True:
-            if stream.bitpos > (bits - self.PART_SIZE_BITS):
-                break
+        while stream.bitpos <= (bits - self.PART_SIZE_BITS):
+            channel = stream.read(TYPE_FORMAT)
 
-            version = stream.read(TYPE_FORMAT)
+            if channel < self.VERSION_LIMIT:
+                # Start of new data packet
+                version = channel
+                if self.verbose and version != self.version:
+                    logger.warning(f'Unknown {version=} (expected {self.version})')
+                timestamp: int = stream.read(TIMESTAMP_FORMAT)
 
-            if self.verbose and version != self.version:
-                logger.warning(f'Unknown {version=} (expected {self.version})')
-
-            timestamp: int = stream.read(TIMESTAMP_FORMAT)
-
-            bits = len(stream)
-
-            while stream.bitpos != bits:
                 channel = stream.read(TYPE_FORMAT)
-                value: float = stream.read(VALUE_FORMAT)
-                data_channel = self.decode_channels.get(channel)
 
-                if data_channel:
-                    datatype, unit = data_channel.split(',')
-                    yield Measurement(time=timestamp, datatype=datatype, value=value, unit=unit)
-                else:
-                    if self.verbose:
-                        logger.debug(f'Unknown {version=} (expected {self.version}) channel {channel}={value}')
+            value: float = stream.read(VALUE_FORMAT)
+            data_channel = self.decode_channels.get(channel)
+
+            if data_channel:
+                datatype, unit = data_channel.split(',')
+                yield Measurement(time=timestamp, datatype=datatype, value=value, unit=unit)
+            else:
+                if self.verbose:
+                    logger.debug(f'Unknown {version=} (expected {self.version}) channel {channel}={value}')
