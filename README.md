@@ -47,7 +47,7 @@ and repeating 5 byte payload of (channel, value)
 
 Several messages of this form can be concatenated to one packet.
 
-Data is sent to mqtt topic g2/{network}/{serial}
+Data is sent to mqtt topic g2/{network}/{serial}/data
 
 <img src="packet.svg">
 
