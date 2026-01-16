@@ -42,7 +42,7 @@ packet
 """
 
 MQTT_ENCODER = 'g2'
-MQTT_TOPIC = 'g2/{network}/{node}'
+MQTT_TOPIC = 'g2/{network}/{node}/data'
 
 TYPE_FORMAT = 'uint:8'
 TIMESTAMP_FORMAT = 'uintbe:32'
@@ -127,7 +127,7 @@ class G2Encoder:
             value = measurement['value']
 
             if previous is None or at != previous:
-                if len(payload.bytes) > self.PART_SIZE_BITS:
+                if len(payload) > self.PART_SIZE_BITS:
                     yield payload.bytes
                 payload = BitStream()
                 payload.append(f'uint:8={self.version}')
@@ -143,7 +143,7 @@ class G2Encoder:
 
             previous = at
 
-        if payload and len(payload.bytes) > self.PART_SIZE_BITS:
+        if payload and len(payload) > self.PART_SIZE_BITS:
             yield payload.bytes
 
     def decode(self, payload: bytes) -> Generator[
@@ -151,6 +151,7 @@ class G2Encoder:
         stream = ConstBitStream(payload)
         bits = len(stream)
         timestamp = 0
+        version = 0
 
         while stream.bitpos <= (bits - self.PART_SIZE_BITS):
             channel = stream.read(TYPE_FORMAT)
