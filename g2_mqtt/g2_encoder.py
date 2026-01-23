@@ -86,6 +86,7 @@ CHANNELS = [
     'pump:u_v,V=235',
     'pump:i_a,A=236',
     'pump:freq,Hz=237',
+    'pump:u_set_w,W=238',
 ]
 
 # Map from datatype to channel number
