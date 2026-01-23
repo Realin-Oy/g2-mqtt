@@ -4,38 +4,39 @@ G2 MQTT Encoder
 Channel list
 ---
 
-| Datatype                    | Unit           | Channel |
-|-----------------------------|----------------|---------|
-| version                     | 1              | < 0x65  |
-| timestamp                   | UNIX timestamp |         |
-| temperature                 | C              | 103     |
-| humidity                    | %              | 104     |
-| barometer                   | Pa             | 115     |
-| pegasor:PN                  | n/cm^3         | 120     |
-| pegasor:OmeFT               |                | 121     |
-| pegasor:humidity            | %              | 122     |
-| pegasor:FeedPressure        | kPa            | 123     |
-| pegasor:ambient_temperature | C              | 124     |
-| pegasor:board_temperature   | C              | 125     |
-| pegasor:CMD                 | nm             | 126     |
-| pegasor:error               |                | 127     |
-| pegasor:PM                  | µg/m^3         | 128     |
-| pegasor:LDSA                | µm^2/cm^3      | 129     |
-| pegasor:PN_uncut            | n/cm^3         | 130     |
-| lat                         | deg            | 136     |
-| lon                         | deg            | 137     |
-| activity                    |                | 200     |
-| disk                        | %              | 201     |
-| load                        |                | 202     |
-| memory                      | %              | 203     |
-| pump:i_term                 |                | 230     |
-| pump:last_time              |                | 231     |
-| pump:set_w                  | W              | 232     |
-| pump:p_w                    | W              | 233     |
-| pump:u_set_v                | V              | 234     |
-| pump:u_v                    | V              | 235     |
-| pump:i_a                    | A              | 236     |
-| pump:freq                   | Hz             | 237     |
+| Datatype                    | Unit      | Channel | Description                          |
+|-----------------------------|-----------|---------|--------------------------------------|
+| version                     |           | 1       | < 0x65                               |
+| timestamp                   | s         | 1       | Unix Timestamp (Seconds since EPOCH) |
+| temperature                 | C         | 103     |                                      |
+| humidity                    | %         | 104     |                                      |
+| barometer                   | Pa        | 115     |                                      |
+| pegasor:PN                  | n/cm^3    | 120     |                                      |
+| pegasor:OmeFT               |           | 121     |                                      |
+| pegasor:humidity            | %         | 122     |                                      |
+| pegasor:FeedPressure        | kPa       | 123     |                                      |
+| pegasor:ambient_temperature | C         | 124     |                                      |
+| pegasor:board_temperature   | C         | 125     |                                      |
+| pegasor:CMD                 | nm        | 126     |                                      |
+| pegasor:error               |           | 127     |                                      |
+| pegasor:PM                  | µg/m^3    | 128     |                                      |
+| pegasor:LDSA                | µm^2/cm^3 | 129     |                                      |
+| pegasor:PN_uncut            | n/cm^3    | 130     |                                      |
+| lat                         | deg       | 136     |                                      |
+| lon                         | deg       | 137     |                                      |
+| activity                    |           | 200     |                                      |
+| disk                        | %         | 201     |                                      |
+| load                        |           | 202     |                                      |
+| memory                      | %         | 203     |                                      |
+| pump:i_term                 |           | 230     |                                      |
+| pump:last_time              |           | 231     |                                      |
+| pump:set_w                  | W         | 232     |                                      |
+| pump:p_w                    | W         | 233     |                                      |
+| pump:u_set_v                | V         | 234     |                                      |
+| pump:u_v                    | V         | 235     |                                      |
+| pump:i_a                    | A         | 236     |                                      |
+| pump:freq                   | Hz        | 237     |                                      |
+| pump:u_set_w                | W         | 238     |                                      |
 
 Payload contents in binary data
 ---
