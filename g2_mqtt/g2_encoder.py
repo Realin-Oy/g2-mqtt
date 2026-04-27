@@ -74,6 +74,15 @@ CHANNELS = [
     'lon,deg=137',
     'gps:lock,=138',
 
+    'cap3070:outlet_shutoff_valve,=140',
+    'cap3070:inlet_shutoff_valve,=141',
+    'cap3070:air_valve,=142',
+    'cap3070:flush_valve,=143',
+    'cap3070:pressure,kPa=144',
+    'cap3070:temperature:probe,C=145',
+    'cap3070:temperature:sensor,C=146',
+    'cap3070:temperature:cabinet,C=147',
+
     'activity,=200',
     'disk,%=201',
     'load,=202',
