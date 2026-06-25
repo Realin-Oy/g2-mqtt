@@ -69,6 +69,7 @@ CHANNELS = [
     'pegasor:PM,µg/m^3=128',
     'pegasor:LDSA,µm^2/cm^3=129',
     'pegasor:PN_uncut,n/cm^3=130',
+    'pegasor:PN10,n/cm^3=131',
 
     'lat,deg=136',
     'lon,deg=137',
