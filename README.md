@@ -22,8 +22,9 @@ Channel list
 | pegasor:PM                   | µg/m^3    | 128     |                                      |
 | pegasor:LDSA                 | µm^2/cm^3 | 129     |                                      |
 | pegasor:PN_uncut             | n/cm^3    | 130     |                                      |
-| lat                          | deg       | 136     |                                      |
-| lon                          | deg       | 137     |                                      |
+| latitude                     | deg       | 136     |                                      |
+| longitude                    | deg       | 137     |                                      |
+| gps:lock                     |           | 138     |                                      |
 | activity                     |           | 200     |                                      |
 | disk                         | %         | 201     |                                      |
 | load                         |           | 202     |                                      |

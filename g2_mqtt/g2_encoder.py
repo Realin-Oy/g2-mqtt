@@ -71,8 +71,8 @@ CHANNELS = [
     'pegasor:PN_uncut,n/cm^3=130',
     'pegasor:PN10,n/cm^3=131',
 
-    'lat,deg=136',
-    'lon,deg=137',
+    'latitude,deg=136',
+    'longitude,deg=137',
     'gps:lock,=138',
 
     'cap3070:outlet_shutoff_valve,=140',
