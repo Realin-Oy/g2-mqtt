@@ -72,6 +72,7 @@ CHANNELS = [
 
     'lat,deg=136',
     'lon,deg=137',
+    'gps:lock,=138',
 
     'activity,=200',
     'disk,%=201',
