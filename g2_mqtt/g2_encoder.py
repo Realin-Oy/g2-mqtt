@@ -89,6 +89,9 @@ CHANNELS = [
     'load,=202',
     'memory,%=203',
 
+    'internal:temperature,C=220',
+    'fan:tach,rpm=221',
+
     'pump:i_term,=230',
     'pump:last_time,=231',
     'pump:set_w,W=232',
