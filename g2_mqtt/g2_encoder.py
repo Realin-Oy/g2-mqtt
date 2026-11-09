@@ -84,6 +84,7 @@ CHANNELS = [
     'cap3070:temperature:sensor,C=146',
     'cap3070:temperature:cabinet,C=147',
 
+    'firmware:version,=199',
     'activity,=200',
     'disk,%=201',
     'load,=202',
